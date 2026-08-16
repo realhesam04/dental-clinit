@@ -8,7 +8,7 @@ class ServiceAdmin(admin.ModelAdmin):
         'name',
         'duration',
         'price',
-        'is_actve',
+        'is_active',
         'created_at',
     ]
     list_filter = ['is_active',]
