@@ -1,3 +1,27 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Services
+
+@admin.register(Services)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        'duration',
+        'price',
+        'is_actve',
+        'created_at',
+    ]
+    list_filter = ['is_active',]
+
+    search_fields = [
+        'name',
+        'description',
+    ]
+
+    prepopulated_fields = {
+        'slug': ('name',),
+    }
+
+    ordering = (
+        'name',
+    )
