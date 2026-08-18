@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-class Services(models.Model):
+class Service(models.Model):
     name = models.CharField(max_length=150)
 
     slug = models.SlugField(

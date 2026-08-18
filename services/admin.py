@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Services
+from .models import Service
 
-@admin.register(Services)
+@admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = [
         'name',
