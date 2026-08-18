@@ -29,3 +29,46 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"{self.user.get_full_name()} - {self.specialty}"
+
+class Availability(models.Model):
+    class Weekday(models.IntegerChoices):
+        SATURDAY = 5, 'Saturday'
+        SUNDAY = 6,'Sunday'
+        MONDAY = 0, 'Monday'
+        TUESDAY = 1, 'Tuesday'
+        WEDNESDAY = 2, 'Wedensday'
+        THURSDAY = 3, 'Thursday'
+        FRIDAY = 4, 'Friday'
+
+    doctor = models.ForeignKey(
+        Doctor,
+        on_delete=models.CASCADE,
+        related_name='availabilities',
+    )
+
+    weekday = models.IntegerField(
+        choices=Weekday.choices,
+    )
+
+    start_time = models.TimeField()
+
+    end_time = models.TimeField()
+
+    is_active = models.BooleanField(
+        default=True,
+    )
+
+    class Meta:
+        ordering = (
+            'weekday',
+            'start_time',
+        )
+    
+    def __str__(self):
+        return (
+            f'{self.doctor} - '
+            f'{self.get_weekday_display()} - '
+            f'{self.start_time} - {self.end_time} '
+        )
+    
+    
